@@ -12,6 +12,7 @@ BEGIN
                 jsonb_build_object(
                     'tag_public_id', mv.tag_public_id,
                     'name',          mv.name,
+                    'caption',       mv.caption,
                     'events',        (
                         SELECT COALESCE(jsonb_agg(e), '[]'::jsonb)
                         FROM (

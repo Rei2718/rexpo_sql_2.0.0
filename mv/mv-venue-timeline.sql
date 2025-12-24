@@ -13,8 +13,8 @@ WITH cte_timeline AS (
                 'caption',         e.caption,
                 'icon',            e.icon,
                 'venue_name',      v.name,
-                'starts',          s.starts,
-                'ends',            s.ends,
+                'starts',          to_char(s.starts, 'HH24:MI'),
+                'ends',            to_char(s.ends, 'HH24:MI'),
                 'display_order',   e.display_order
             ) ORDER BY e.display_order DESC, e.event_id
         ) AS events
@@ -34,7 +34,7 @@ SELECT
     COALESCE(
         jsonb_agg(
             jsonb_build_object(
-                'starts', t.starts,
+                'starts', to_char(t.starts, 'HH24:MI'),
                 'events', t.events
             ) ORDER BY t.starts ASC
         ) FILTER (WHERE t.starts IS NOT NULL),

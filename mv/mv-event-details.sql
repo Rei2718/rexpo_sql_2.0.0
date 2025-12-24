@@ -39,8 +39,8 @@ cte_slots AS (
         jsonb_agg(
             jsonb_build_object(
                 'slot_public_id', s.slot_public_id,
-                'starts',         s.starts,
-                'ends',           s.ends,
+                'starts',         to_char(s.starts, 'HH24:MI'),
+                'ends',           to_char(s.ends, 'HH24:MI'),
                 'display_order',  es.display_order
             ) ORDER BY es.display_order DESC, s.slot_id
         ) AS data
